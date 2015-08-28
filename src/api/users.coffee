@@ -8,6 +8,7 @@ class Users extends BaseClass
     list: '/api/users.list'
     setActive: '/api/users.setActive'
     setPresence: '/api/users.setPresence'
+    invite: '/api/users.admin.invite'
 
   #
   # Official API Methods
@@ -30,5 +31,12 @@ class Users extends BaseClass
     @validate.obj opts, [ 'presence' ]
     @validate.inclusion opts.presence, [ 'away', 'auto' ]
     @request 'POST', @endpoints.setPresence, opts, callback
+  #
+  # Unoffical API Methods
+  #
+  invite: (opts = {}, callback) ->
+    @validate.obj opts, [ 'email' ]
+    @validate.obj opts, [ 'set_active' ]
+    @request 'POST', @endpoints.invite, opts, callback
 
 module.exports = Users
