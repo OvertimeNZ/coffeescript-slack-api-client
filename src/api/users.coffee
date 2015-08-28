@@ -37,6 +37,7 @@ class Users extends BaseClass
   invite: (opts = {}, callback) ->
     @validate.obj opts, [ 'email' ]
     @validate.obj opts, [ 'set_active' ]
+    @validate.inclusion opts.set_active, [ 'true', 'false' ]
     @request 'POST', @endpoints.invite, opts, callback
 
 module.exports = Users
